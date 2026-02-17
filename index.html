@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>KAAAND | Exhibit-1 Coming Soon</title>
+    <title>KAAAND | Exhibit-1</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --brand-red: #E60000;
-            --brand-dark: #A50000;
+            --brand-red: #D00000;
+            --brand-dark: #8B0000;
             --white: #FFFFFF;
             --black: #000000;
-            --ease: cubic-bezier(0.23, 1, 0.32, 1);
-            --transition-fast: 0.4s var(--ease);
+            --grid-color: rgba(0, 0, 0, 0.12);
+            --ease: cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * {
@@ -38,16 +38,23 @@
             align-items: center;
             overflow: hidden;
             position: relative;
-            background: radial-gradient(circle at center, var(--brand-red) 0%, var(--brand-dark) 100%);
+            
+            /* Combined blurred radial gradient and static grid */
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px),
+                radial-gradient(circle at center, var(--brand-red) 0%, var(--brand-dark) 100%);
+            background-size: 50px 50px, 50px 50px, 100% 100%;
+            background-position: center center;
         }
 
-        /* Grain texture for editorial feel */
+        /* Subtle grain texture for an editorial finish */
         body::after {
             content: "";
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
             background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
-            opacity: 0.12;
+            opacity: 0.1;
             pointer-events: none;
             z-index: 1;
         }
@@ -57,48 +64,48 @@
             z-index: 10;
             text-align: center;
             width: 100%;
-            padding: 0 1.25rem;
+            padding: 0 1.5rem;
             max-width: 900px;
         }
 
         .issue-label {
             display: inline-block;
-            font-size: clamp(0.55rem, 2.5vw, 0.65rem);
+            font-size: 0.6rem;
             font-weight: 800;
-            letter-spacing: 0.35em;
+            letter-spacing: 0.5em;
             text-transform: uppercase;
-            padding: 0.6rem 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            margin-bottom: 1.5rem;
+            padding: 0.6rem 1.4rem;
+            border: 1px solid var(--white);
+            margin-bottom: 2.5rem;
             opacity: 0;
-            animation: fadeInDown 1s var(--ease) 0.2s forwards;
-            white-space: nowrap;
+            transform: translateY(10px);
+            animation: revealUp 0.8s var(--ease) 0.2s forwards;
+            background: rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
         }
 
         .logo {
-            font-size: clamp(3.2rem, 16vw, 11rem);
+            font-size: clamp(3.2rem, 18vw, 11rem);
             font-weight: 900;
             letter-spacing: -0.04em;
             text-transform: uppercase;
             color: var(--white);
-            line-height: 0.9;
+            line-height: 0.85;
             margin-bottom: 1.5rem;
             user-select: none;
-            display: block;
             opacity: 0;
-            transform: scale(1.05);
-            filter: blur(8px);
-            animation: revealLogo 1.4s var(--ease) forwards;
+            transform: translateY(20px);
+            animation: revealUp 1s var(--ease) 0.4s forwards;
         }
 
         .tagline {
-            font-size: clamp(0.65rem, 1.8vw, 0.9rem);
+            font-size: clamp(0.7rem, 2vw, 1rem);
             font-weight: 600;
-            letter-spacing: 0.4em;
+            letter-spacing: 0.5em;
             text-transform: uppercase;
             margin-bottom: 4rem;
             opacity: 0;
-            animation: fadeIn 1.2s var(--ease) 0.6s forwards;
+            animation: fadeIn 1s var(--ease) 0.8s forwards;
         }
 
         .form-container {
@@ -106,8 +113,7 @@
             margin: 0 auto;
             width: 100%;
             opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s var(--ease) 0.8s forwards;
+            animation: fadeIn 1.2s var(--ease) 1s forwards;
         }
 
         .signup-form {
@@ -118,45 +124,43 @@
 
         input[type="email"] {
             width: 100%;
-            padding: 1rem 0.5rem;
+            padding: 1.25rem 0;
             background: transparent;
             border: none;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
             border-radius: 0;
             color: var(--white);
-            /* Set to 16px to prevent iOS auto-zoom on focus */
-            font-size: 16px;
+            font-size: 16px; 
             text-align: center;
             outline: none;
-            transition: var(--transition-fast);
-            letter-spacing: 0.02em;
+            transition: all 0.3s var(--ease);
+            letter-spacing: 0.05em;
         }
 
         input[type="email"]:focus {
             border-bottom-color: var(--white);
+            background: rgba(255, 255, 255, 0.05);
         }
 
         input[type="email"]::placeholder {
-            color: rgba(255, 255, 255, 0.4);
-            font-weight: 500;
+            color: rgba(255, 255, 255, 0.5);
             text-transform: uppercase;
-            font-size: 0.75rem;
-            letter-spacing: 0.15em;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
         }
 
         button {
             width: 100%;
-            padding: 1.15rem;
+            padding: 1.25rem;
             background: var(--white);
-            color: var(--brand-red);
+            color: var(--black);
             border: none;
             font-weight: 900;
             text-transform: uppercase;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.25em;
             font-size: 0.75rem;
             cursor: pointer;
-            transition: var(--transition-fast);
-            margin-top: 0.5rem;
+            transition: all 0.3s var(--ease);
         }
 
         button:hover {
@@ -165,47 +169,35 @@
             transform: translateY(-2px);
         }
 
-        button:active {
-            transform: scale(0.98);
-        }
-
         .success-message {
             display: none;
             font-weight: 800;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
-            font-size: 0.85rem;
-            animation: fadeIn 0.6s var(--ease);
+            font-size: 0.9rem;
+            margin-top: 1rem;
             padding: 1rem;
+            background: rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
         }
 
         .footer {
             position: absolute;
-            bottom: 2rem;
+            bottom: 2.5rem;
             width: 100%;
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-            font-size: 0.55rem;
+            padding: 0 4rem;
+            font-size: 0.6rem;
             font-weight: 700;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.3em;
             z-index: 10;
-            opacity: 0.4;
+            opacity: 0.6;
             text-transform: uppercase;
         }
 
         /* Animations */
-        @keyframes revealLogo {
-            to { opacity: 1; transform: scale(1); filter: blur(0); }
-        }
-
-        @keyframes fadeInUp {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
+        @keyframes revealUp {
             to { opacity: 1; transform: translateY(0); }
         }
 
@@ -214,26 +206,25 @@
         }
 
         /* Mobile Optimization */
-        @media (max-width: 600px) {
-            .container { padding: 0 1.5rem; }
+        @media (max-width: 768px) {
+            body { background-size: 40px 40px, 40px 40px, 100% 100%; }
             .logo { letter-spacing: -0.02em; margin-bottom: 1rem; }
-            .tagline { letter-spacing: 0.25em; margin-bottom: 3rem; }
-            .issue-label { padding: 0.5rem 0.8rem; margin-bottom: 1rem; }
-            
+            .tagline { letter-spacing: 0.3em; margin-bottom: 3rem; }
             .footer { 
-                padding: 0 1rem;
+                padding: 0 2rem;
                 flex-direction: column; 
-                gap: 0.5rem; 
-                bottom: 1.5rem;
+                align-items: center; 
+                gap: 0.8rem; 
+                bottom: 2rem;
                 text-align: center;
             }
-            .footer .dot { display: none; }
+            .dot { display: none; }
         }
 
-        /* Tall screens optimization */
-        @media (min-height: 850px) {
-            .logo { margin-bottom: 2.5rem; }
-            .tagline { margin-bottom: 5rem; }
+        @media (max-height: 750px) {
+            .logo { margin-bottom: 1rem; }
+            .tagline { margin-bottom: 2rem; }
+            .footer { bottom: 1.5rem; }
         }
     </style>
 </head>
@@ -248,12 +239,10 @@
 
         <div class="form-container">
             <form class="signup-form" id="notifyForm">
-                <div class="input-wrapper">
-                    <input type="email" id="email" placeholder="Enter email address" required autocomplete="email">
-                </div>
-                <button type="submit" id="submitBtn">Request Access</button>
+                <input type="email" id="email" placeholder="YOUR EMAIL ADDRESS" required autocomplete="email">
+                <button type="submit" id="submitBtn">Notify Me</button>
             </form>
-            <div id="successMsg" class="success-message">Access Granted. Wait for the drop.</div>
+            <div id="successMsg" class="success-message">Added to the list.</div>
         </div>
     </div>
 
@@ -273,13 +262,13 @@
             const success = document.getElementById('successMsg');
             
             btn.innerHTML = "Processing...";
-            btn.style.opacity = "0.7";
             btn.disabled = true;
 
             setTimeout(() => {
                 form.style.display = 'none';
                 success.style.display = 'block';
-            }, 1000);
+                success.style.opacity = '1';
+            }, 800);
         });
     </script>
 </body>
